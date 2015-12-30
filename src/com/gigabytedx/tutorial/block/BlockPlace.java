@@ -1,5 +1,6 @@
 package com.gigabytedx.tutorial.block;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +17,10 @@ public class BlockPlace implements Listener{
 	public void onBlockPlace(BlockPlaceEvent event){
 		if(getWorldGuard().canBuild(event.getPlayer(), event.getBlock()))
 			if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
-				manipulateRegions.claimLand(event.getBlock().getLocation(), event.getPlayer());
+				if(!(manipulateRegions.claimLand(event.getBlock().getLocation(), event.getPlayer()))){
+					event.setCancelled(true);
+					event.getPlayer().sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.RED + "This overlaps another players region");
+				}
 			}
 	}
 	

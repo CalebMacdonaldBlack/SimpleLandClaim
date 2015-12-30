@@ -1,5 +1,7 @@
 package com.gigabytedx.tutorial.regions;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -11,10 +13,11 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class manipulateRegions {
 
-	public static void claimLand(Location location, Player player) {
+	public static boolean claimLand(Location location, Player player) {
 		int dist = Tutorial.pluginInstance.getConfig().getInt("cuboid size");
 		BlockVector vector = new BlockVector(dist, dist, dist);
 		BlockVector vectorA = new BlockVector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
@@ -23,6 +26,13 @@ public class manipulateRegions {
 		vectorA = new BlockVector(vectorA.subtract(vector));
 		vectorB = new BlockVector(vectorB.add(vector));
 		ProtectedCuboidRegion region = new ProtectedCuboidRegion(getLocationNameForRegionId(location), vectorA, vectorB );
+		List<ProtectedRegion> list = region.getIntersectingRegions(getWorldGuard().getRegionManager(location.getWorld()).getRegions().values());
+		
+		for(ProtectedRegion element: list){
+			if (!(element.getOwners().contains(player.getUniqueId())))
+				return false;
+		}
+		
 		
 		DefaultDomain owners = new DefaultDomain();
 		owners.addPlayer(player.getUniqueId());
@@ -33,6 +43,7 @@ public class manipulateRegions {
 		
 		getWorldGuard().getRegionManager(location.getWorld()).addRegion(region);
 		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully added this region");
+		return true;
 	}
 	
 	private static WorldGuardPlugin getWorldGuard() {

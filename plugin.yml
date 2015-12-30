@@ -1,7 +1,7 @@
 main: com.gigabytedx.tutorial.Tutorial
-version: 1.0
-name: Tutorial Plugin
+version: 1.1
+name: Simple Land Protection
 
 commands:
   getlandblock:
-    description: my tutorial command
+    description: adds 2 gold blocks to players inventory

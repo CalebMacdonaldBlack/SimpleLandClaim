@@ -19,10 +19,14 @@ public class GetLandBlock implements CommandExecutor {
 			sender.sendMessage("You must be a player to use this command!");
 			return false;
 		}
+		
 		Player player = (Player) sender;
-		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "Giving you a land protection block");
-		givePlayerLandProtectionBlock(player);
-
+		if(player.hasPermission("simplelandprotection.getlandblock")){
+			player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "Giving you a land protection block");
+			givePlayerLandProtectionBlock(player);
+		}else{
+			player.sendMessage(ChatColor.RED + "you do not have permission to perform this command!");
+		}
 		return false;
 	}
 

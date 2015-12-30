@@ -10,6 +10,7 @@ import com.gigabytedx.tutorial.block.BlockBreak;
 import com.gigabytedx.tutorial.block.BlockPlace;
 import com.gigabytedx.tutorial.block.PistonExtend;
 import com.gigabytedx.tutorial.commands.GetLandBlock;
+import com.gigabytedx.tutorial.interact.EntityInteract;
 import com.gigabytedx.tutorial.inventory.PrepareItemCraft;
 
 public class Tutorial extends JavaPlugin {
@@ -38,6 +39,7 @@ public class Tutorial extends JavaPlugin {
 		pm.registerEvents(new BlockBreak(), this);
 		pm.registerEvents(new PistonExtend(), this);
 		pm.registerEvents(new BlockPlace(), this);
+		pm.registerEvents(new EntityInteract(), this);
 	}
 
 	private void registerCommands() {
