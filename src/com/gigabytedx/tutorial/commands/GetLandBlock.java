@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.gigabytedx.tutorial.Tutorial;
 import com.gigabytedx.tutorial.manipulateItems.AddLandProtectionMetaData;
 
 public class GetLandBlock implements CommandExecutor {
@@ -19,7 +20,7 @@ public class GetLandBlock implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		player.sendMessage(ChatColor.GREEN + "Giving you a land protection block");
+		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "Giving you a land protection block");
 		givePlayerLandProtectionBlock(player);
 
 		return false;
