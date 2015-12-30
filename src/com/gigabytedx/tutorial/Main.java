@@ -13,8 +13,8 @@ import com.gigabytedx.tutorial.commands.GetLandBlock;
 import com.gigabytedx.tutorial.interact.EntityInteract;
 import com.gigabytedx.tutorial.inventory.PrepareItemCraft;
 
-public class Tutorial extends JavaPlugin {
-	public static Tutorial pluginInstance;
+public class Main extends JavaPlugin {
+	public static Main pluginInstance;
 	
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = getDescription();

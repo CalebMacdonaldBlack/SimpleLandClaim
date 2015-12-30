@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import com.gigabytedx.tutorial.Tutorial;
+import com.gigabytedx.tutorial.Main;
 import com.gigabytedx.tutorial.manipulateItems.AddLandProtectionMetaData;
 import com.gigabytedx.tutorial.regions.manipulateRegions;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -39,7 +39,7 @@ public class BlockBreak implements Listener{
 	}
 	
 	private static WorldGuardPlugin getWorldGuard() {
-	    Plugin plugin = Tutorial.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
+	    Plugin plugin = Main.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
 	 
 	    // WorldGuard may not be loaded
 	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {

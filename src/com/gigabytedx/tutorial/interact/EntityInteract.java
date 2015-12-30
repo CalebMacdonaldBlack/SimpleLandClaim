@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.Plugin;
 
-import com.gigabytedx.tutorial.Tutorial;
+import com.gigabytedx.tutorial.Main;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -41,21 +41,21 @@ public class EntityInteract implements Listener {
 				}
 
 			if (canBuild.equals("yes")) {
-				event.getPlayer().sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - "
+				event.getPlayer().sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - "
 						+ ChatColor.GOLD + "You have allowed " + friend.getName() + " to build on your land");
-				friend.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD
+				friend.sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.GOLD
 						+ event.getPlayer().getName() + " has allowed you to build on his land");
 			} else {
-				event.getPlayer().sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - "
+				event.getPlayer().sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - "
 						+ ChatColor.GOLD + friend.getName() + " can no longer build on your land");
-				friend.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.RED
+				friend.sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.RED
 						+ "you can no longer build on " + event.getPlayer().getName() + "'s land");
 			}
 		}
 	}
 
 	private static WorldGuardPlugin getWorldGuard() {
-		Plugin plugin = Tutorial.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
+		Plugin plugin = Main.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
 
 		// WorldGuard may not be loaded
 		if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {

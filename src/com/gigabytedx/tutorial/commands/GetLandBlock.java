@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.gigabytedx.tutorial.Tutorial;
+import com.gigabytedx.tutorial.Main;
 import com.gigabytedx.tutorial.manipulateItems.AddLandProtectionMetaData;
 
 public class GetLandBlock implements CommandExecutor {
@@ -22,7 +22,7 @@ public class GetLandBlock implements CommandExecutor {
 		
 		Player player = (Player) sender;
 		if(player.hasPermission("simplelandprotection.getlandblock")){
-			player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "Giving you a land protection block");
+			player.sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.GOLD + "Giving you a land protection block");
 			givePlayerLandProtectionBlock(player);
 		}else{
 			player.sendMessage(ChatColor.RED + "you do not have permission to perform this command!");

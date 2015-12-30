@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.Plugin;
 
-import com.gigabytedx.tutorial.Tutorial;
+import com.gigabytedx.tutorial.Main;
 import com.gigabytedx.tutorial.regions.manipulateRegions;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
@@ -19,13 +19,13 @@ public class BlockPlace implements Listener{
 			if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
 				if(!(manipulateRegions.claimLand(event.getBlock().getLocation(), event.getPlayer()))){
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.RED + "This overlaps another players region");
+					event.getPlayer().sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.RED + "This overlaps another players region");
 				}
 			}
 	}
 	
 	private static WorldGuardPlugin getWorldGuard() {
-	    Plugin plugin = Tutorial.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
+	    Plugin plugin = Main.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
 	 
 	    // WorldGuard may not be loaded
 	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {

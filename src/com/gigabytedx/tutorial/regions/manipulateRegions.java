@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import com.gigabytedx.tutorial.Tutorial;
+import com.gigabytedx.tutorial.Main;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
@@ -18,7 +18,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class manipulateRegions {
 
 	public static boolean claimLand(Location location, Player player) {
-		int dist = Tutorial.pluginInstance.getConfig().getInt("cuboid size");
+		int dist = Main.pluginInstance.getConfig().getInt("cuboid size");
 		BlockVector vector = new BlockVector(dist, dist, dist);
 		BlockVector vectorA = new BlockVector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 		BlockVector vectorB = vectorA;
@@ -42,12 +42,12 @@ public class manipulateRegions {
 		region.setFlag(DefaultFlag.FAREWELL_MESSAGE, "You have left " + player.getName() + "'s property");
 		
 		getWorldGuard().getRegionManager(location.getWorld()).addRegion(region);
-		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully added this region");
+		player.sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully added this region");
 		return true;
 	}
 	
 	private static WorldGuardPlugin getWorldGuard() {
-	    Plugin plugin = Tutorial.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
+	    Plugin plugin = Main.pluginInstance.getServer().getPluginManager().getPlugin("WorldGuard");
 	 
 	    // WorldGuard may not be loaded
 	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
@@ -65,7 +65,7 @@ public class manipulateRegions {
 
 	public static void removeRegion(Player player, Location location) {
 		getWorldGuard().getRegionManager(location.getWorld()).removeRegion(getLocationNameForRegionId(location));
-		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully removed this region");
+		player.sendMessage(ChatColor.GREEN + Main.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully removed this region");
 
 		
 	}
