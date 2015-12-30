@@ -1,0 +1,1 @@
+/getlandblock no-configured-permission
