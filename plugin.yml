@@ -1,0 +1,7 @@
+main: com.gigabytedx.tutorial.Tutorial
+version: 1.0
+name: Tutorial Plugin
+
+commands:
+  getlandblock:
+    description: my tutorial command
