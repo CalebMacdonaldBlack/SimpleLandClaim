@@ -20,6 +20,7 @@ public class Tutorial extends JavaPlugin {
 		Logger logger = getLogger();
 		registerCommands();
 		registerEvents();
+		registerConfig();
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 		pluginInstance = this;
 	}
@@ -41,5 +42,9 @@ public class Tutorial extends JavaPlugin {
 
 	private void registerCommands() {
 		getCommand("getlandblock").setExecutor(new GetLandBlock());
+	}
+	
+	private void registerConfig(){
+		saveDefaultConfig();
 	}
 }

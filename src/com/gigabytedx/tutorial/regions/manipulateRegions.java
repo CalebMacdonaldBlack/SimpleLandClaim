@@ -15,7 +15,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 public class manipulateRegions {
 
 	public static void claimLand(Location location, Player player) {
-		BlockVector vector = new BlockVector(7, 7, 7);
+		int dist = Tutorial.pluginInstance.getConfig().getInt("cuboid size");
+		BlockVector vector = new BlockVector(dist, dist, dist);
 		BlockVector vectorA = new BlockVector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 		BlockVector vectorB = vectorA;
 		
@@ -49,5 +50,12 @@ public class manipulateRegions {
 		String regionName =  String.valueOf(location.getX()) + String.valueOf(location.getY()) + String.valueOf(location.getZ()) + location.getWorld().getName();
 		regionName = regionName.replace(".", "");
 		return regionName;
+	}
+
+	public static void removeRegion(Player player, Location location) {
+		getWorldGuard().getRegionManager(location.getWorld()).removeRegion(getLocationNameForRegionId(location));
+		player.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD + "You have successfully removed this region");
+
+		
 	}
 }
