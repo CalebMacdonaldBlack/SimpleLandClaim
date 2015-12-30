@@ -1,7 +1,6 @@
 package com.gigabytedx.tutorial.block;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,7 +12,6 @@ public class BlockBreak implements Listener{
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event){
-		Player player = event.getPlayer();
 		
 		if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
 			event.setCancelled(true);

@@ -6,6 +6,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gigabytedx.tutorial.block.BlockBreak;
+import com.gigabytedx.tutorial.block.PistonExtend;
 import com.gigabytedx.tutorial.commands.GetLandBlock;
 import com.gigabytedx.tutorial.inventory.PrepareItemCraft;
 
@@ -30,6 +31,7 @@ public class Tutorial extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PrepareItemCraft(), this);
 		pm.registerEvents(new BlockBreak(), this);
+		pm.registerEvents(new PistonExtend(), this);
 	}
 
 	private void registerCommands() {
