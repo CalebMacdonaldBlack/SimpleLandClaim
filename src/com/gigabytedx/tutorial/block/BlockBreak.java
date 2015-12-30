@@ -16,7 +16,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class BlockBreak implements Listener{
 
-	@EventHandler
+	@EventHandler 
 	public void onBlockBreak(BlockBreakEvent event){
 		if(event.getPlayer().hasPermission("simplelandprotection.removeanylandblock")){
 			manipulateRegions.removeRegion(event.getPlayer(), event.getBlock().getLocation());
