@@ -22,24 +22,25 @@ public class EntityInteract implements Listener {
 		if (event.getRightClicked() instanceof Player
 				&& event.getPlayer().getItemInHand().getType().equals(Material.GOLD_BLOCK)) {
 			Player friend = (Player) event.getRightClicked();
-			boolean canBuild = false;
+			String canBuild = "notSet";
 			for (World world : Bukkit.getWorlds())
 				for (ProtectedRegion region : getWorldGuard().getRegionManager(world).getRegions().values()) {
 					if (region.getOwners().contains(event.getPlayer().getUniqueId())) {
 						DefaultDomain members = region.getMembers();
 
-						if (members.contains(friend.getUniqueId())) {
+						if ((members.contains(friend.getUniqueId()) && !(canBuild.equals("yes"))) || canBuild.equals("no")) {
 							members.removePlayer(friend.getUniqueId());
 							region.setMembers(members);
+							canBuild = "no";
 						} else {
 							members.addPlayer(friend.getUniqueId());
 							region.setMembers(members);
-							canBuild = true;
+							canBuild = "yes";
 						}
 					}
 				}
 
-			if (canBuild) {
+			if (canBuild.equals("yes")) {
 				event.getPlayer().sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - "
 						+ ChatColor.GOLD + "You have allowed " + friend.getName() + " to build on your land");
 				friend.sendMessage(ChatColor.GREEN + Tutorial.pluginInstance.getName() + " - " + ChatColor.GOLD
