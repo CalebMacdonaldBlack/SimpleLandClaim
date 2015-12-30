@@ -1,5 +1,7 @@
 package com.gigabytedx.tutorial.block;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,13 +20,18 @@ public class BlockBreak implements Listener{
 	public void onBlockBreak(BlockBreakEvent event){
 		if(getWorldGuard().canBuild(event.getPlayer(), event.getBlock()))
 			if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
-				event.setCancelled(true);
-				event.getBlock().setType(Material.AIR);
-				ItemStack itemStack = new ItemStack(Material.GOLD_BLOCK);
-				itemStack.setItemMeta(AddLandProtectionMetaData.addLandProtectionMeta(itemStack.getItemMeta()));
-				event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), itemStack );
-				
-				manipulateRegions.removeRegion(event.getPlayer(), event.getBlock().getLocation());
+				if(getWorldGuard().getRegionManager(event.getPlayer().getWorld()).getRegion(getLocationNameForRegionId(event.getBlock().getLocation())).getOwners().contains(event.getPlayer().getUniqueId())){
+					event.setCancelled(true);
+					event.getBlock().setType(Material.AIR);
+					ItemStack itemStack = new ItemStack(Material.GOLD_BLOCK);
+					itemStack.setItemMeta(AddLandProtectionMetaData.addLandProtectionMeta(itemStack.getItemMeta()));
+					event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), itemStack );
+					
+					manipulateRegions.removeRegion(event.getPlayer(), event.getBlock().getLocation());
+				}else{
+					event.getPlayer().sendMessage(ChatColor.RED + "This doesn't belong to you!");
+					event.setCancelled(true);
+				}
 			}
 		
 	}
@@ -38,5 +45,11 @@ public class BlockBreak implements Listener{
 	    }
 	 
 	    return (WorldGuardPlugin) plugin;
+	}
+	
+	private static String getLocationNameForRegionId(Location location){
+		String regionName =  String.valueOf(location.getX()) + String.valueOf(location.getY()) + String.valueOf(location.getZ()) + location.getWorld().getName();
+		regionName = regionName.replace(".", "");
+		return regionName;
 	}
 }

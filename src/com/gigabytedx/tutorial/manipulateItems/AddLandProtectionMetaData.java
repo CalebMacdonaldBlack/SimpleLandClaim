@@ -11,7 +11,9 @@ public class AddLandProtectionMetaData {
 		
 		itemMeta.setDisplayName(ChatColor.GOLD + "Place this block to claim the land around it");
 		List<String> lore = new ArrayList<String>();
-		lore.add("craft your own gold blocks to claim more land");
+		lore.add("Craft your own gold blocks to claim more land");
+		lore.add("Right click a player to allow them to build with you");
+		lore.add("hint: bury these to make your home look nicer");
 		itemMeta.setLore(lore);
 		
 		return itemMeta;
