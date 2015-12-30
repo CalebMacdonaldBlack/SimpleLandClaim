@@ -18,7 +18,9 @@ public class BlockBreak implements Listener{
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event){
-		if(getWorldGuard().canBuild(event.getPlayer(), event.getBlock()))
+		if(event.getPlayer().hasPermission("simplelandprotection.removeanylandblock")){
+			manipulateRegions.removeRegion(event.getPlayer(), event.getBlock().getLocation());
+		}else if(getWorldGuard().canBuild(event.getPlayer(), event.getBlock()))
 			if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
 				if(getWorldGuard().getRegionManager(event.getPlayer().getWorld()).getRegion(getLocationNameForRegionId(event.getBlock().getLocation())).getOwners().contains(event.getPlayer().getUniqueId())){
 					event.setCancelled(true);
