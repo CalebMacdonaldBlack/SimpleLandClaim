@@ -1,6 +1,6 @@
-main: com.gigabytedx.tutorial.Main
+main: com.gigabytedx.simplelandprotect.Main
 version: 1.1
-name: Simple Land Protection
+name: SimpleLandProtection
 
 commands:
   getlandblock:
