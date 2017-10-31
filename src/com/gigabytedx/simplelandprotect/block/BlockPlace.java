@@ -15,6 +15,7 @@ public class BlockPlace implements Listener{
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event){
+
 		if(getWorldGuard().canBuild(event.getPlayer(), event.getBlock()))
 			if(event.getBlock().getType().equals(Material.GOLD_BLOCK)){
 				if(!(manipulateRegions.claimLand(event.getBlock().getLocation(), event.getPlayer()))){

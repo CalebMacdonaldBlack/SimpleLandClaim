@@ -2,6 +2,10 @@ package com.gigabytedx.simplelandprotect;
 
 import java.util.logging.Logger;
 
+import com.gigabytedx.simplelandprotect.block.GoldBlockProtect;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +17,7 @@ import com.gigabytedx.simplelandprotect.commands.GetLandBlock;
 import com.gigabytedx.simplelandprotect.interact.EntityInteract;
 import com.gigabytedx.simplelandprotect.inventory.PrepareItemCraft;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
 	public static Main pluginInstance;
 	
 	public void onEnable() {
@@ -35,11 +39,13 @@ public class Main extends JavaPlugin {
 
 	private void registerEvents() {
 		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(this, this);
 		pm.registerEvents(new PrepareItemCraft(), this);
 		pm.registerEvents(new BlockBreak(), this);
 		pm.registerEvents(new PistonExtend(), this);
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new EntityInteract(), this);
+		pm.registerEvents(new GoldBlockProtect(), this);
 	}
 
 	private void registerCommands() {
@@ -48,5 +54,12 @@ public class Main extends JavaPlugin {
 	
 	private void registerConfig(){
 		saveDefaultConfig();
+	}
+
+	@EventHandler
+	private void onNewPlayerJoin(PlayerJoinEvent e) {
+		if (!e.getPlayer().hasPlayedBefore()) {
+		    new GetLandBlock().givePlayerLandProtectionBlock(e.getPlayer());
+		}
 	}
 }
